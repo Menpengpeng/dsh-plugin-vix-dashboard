@@ -25,7 +25,7 @@ DeepSeek Harness 的美股市场信号插件，用于汇总六项情绪与技术
 
 ## 安装
 
-本插件面向 DeepSeek Harness 的 Cordis 插件运行时。
+本插件面向 DeepSeek Harness 的 Cordis 插件运行时，包标识为 `@local/dsh-plugin-vix-dashboard`。
 
 ```bash
 npm install
