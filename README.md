@@ -23,15 +23,28 @@ DeepSeek Harness 的美股市场信号插件，用于汇总六项情绪与技术
 
 插件会优先通过配置的行情代理请求数据；代理不可用时会尝试直连公开来源。若本地网络无法访问上述站点，将保留历史快照，并在连通性卡片中显示本次失败原因。
 
-## 安装
+## 在 DeepSeek Harness 中安装
 
-本插件面向 DeepSeek Harness 的 Cordis 插件运行时，包标识为 `@local/dsh-plugin-vix-dashboard`。
+本插件是 DeepSeek Harness 的本地 Cordis bundle，包标识为 `@local/dsh-plugin-vix-dashboard`。它不是发布到 npm registry 的通用 npm 包，因此不要用 `npm install` 作为插件安装方式。
+
+1. 克隆私有仓库：
+
+   ```bash
+   gh repo clone Menpengpeng/dsh-plugin-vix-dashboard
+   ```
+
+2. 在 DeepSeek Harness 的插件管理器中，以**本地 bundle**方式安装克隆后的 `dsh-plugin-vix-dashboard` 目录；该操作等同于 Harness 的 `install_bundle` 流程。
+3. 启用插件后，侧边栏会出现“市场信号”入口。首次进入后点击“刷新指标”获取当前快照。
+
+## 本地开发
+
+仅在开发或修改源码时安装依赖：
 
 ```bash
 npm install
 ```
 
-在 Harness 中安装或启用本目录的插件包后，侧边栏会出现“市场信号”入口。首次进入后点击“刷新指标”获取当前快照。
+`npm install` 只准备本地依赖，不会将插件注册到 DeepSeek Harness。
 
 ## 开发验证
 
