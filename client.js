@@ -1,5 +1,5 @@
 ﻿window.__ModuleLoader__.load({
-  id: '@local/vix-dashboard',
+  id: '@local/dsh-plugin-vix-dashboard',
   factory(require) {
     const React = require('react');
     const h = React.createElement;
