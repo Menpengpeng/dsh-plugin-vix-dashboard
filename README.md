@@ -14,7 +14,8 @@ DeepSeek Harness 的美股市场信号插件，用于汇总六项情绪与技术
 - 操作日志：可记录加仓/减仓、关联当时指标快照并回看。
 - Agent 工具：`vix_dashboard` 支持当前信号、分析、快照历史与操作记录查询。
 
-  ![Uploading image.png…]()
+  <img width="1618" height="978" alt="image" src="https://github.com/user-attachments/assets/7e1ce06d-896f-4920-8039-8aa0ad2096cc" />
+
 
 
 ## 数据来源
