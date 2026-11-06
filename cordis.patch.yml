@@ -1,0 +1,3 @@
+﻿- insert:
+    - id: vix-dashboard
+      name: '@local/vix-dashboard'

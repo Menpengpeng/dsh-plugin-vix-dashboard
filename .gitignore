@@ -1,0 +1,12 @@
+﻿# 本地依赖与环境文件
+node_modules/
+.env
+.env.*
+*.log
+npm-debug.log*
+
+# 编辑器与系统文件
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
