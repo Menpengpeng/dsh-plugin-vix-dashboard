@@ -107,20 +107,20 @@
     }
     function PortfolioPanel({ portfolio, onChanged, onError }) {
       const [cash, setCash] = useState(''); const [position, setPosition] = useState(''); const [saving, setSaving] = useState(false);
-      if (!portfolio) return null;
+      const pf = portfolio || { cash: 0, position: 0, initialCash: 0, initialPosition: 0, updatedAt: null };
       const fmt = value => Number(value).toLocaleString(undefined, { maximumFractionDigits: 2 });
       async function saveInitial(event) {
         event.preventDefault(); setSaving(true); try { await api('POST', { type: 'set-initial', cash, position }); setCash(''); setPosition(''); await onChanged(); } catch (e) { onError(e.message); } finally { setSaving(false); }
       }
-      const setupOpen = !portfolio.initialCash && !portfolio.initialPosition && !portfolio.cash && !portfolio.position;
-      return h('section', { className: 'vixd-portfolio' }, h('div', { className: 'vixd-portfolio-head' }, h('b', null, '资金面板'), h('span', { className: 'vixd-muted' }, portfolio.updatedAt ? `更新 ${new Date(portfolio.updatedAt).toLocaleString()}` : '尚未设定')),
+      const setupOpen = !pf.initialCash && !pf.initialPosition && !pf.cash && !pf.position;
+      return h('section', { className: 'vixd-portfolio' }, h('div', { className: 'vixd-portfolio-head' }, h('b', null, '资金面板'), h('span', { className: 'vixd-muted' }, pf.updatedAt ? `更新 ${new Date(pf.updatedAt).toLocaleString()}` : '尚未设定')),
         h('div', { className: 'vixd-portfolio-grid' },
-          h('div', { className: 'vixd-portfolio-cell cash' }, h('span', { className: 'vixd-portfolio-label' }, '剩余现金'), h('span', { className: 'vixd-portfolio-value' }, fmt(portfolio.cash))),
-          h('div', { className: 'vixd-portfolio-cell position' }, h('span', { className: 'vixd-portfolio-label' }, '当前持仓（成本）'), h('span', { className: 'vixd-portfolio-value' }, fmt(portfolio.position))),
-          h('div', { className: 'vixd-portfolio-cell' }, h('span', { className: 'vixd-portfolio-label' }, '总资产'), h('span', { className: 'vixd-portfolio-value' }, fmt(portfolio.cash + portfolio.position)))),
+          h('div', { className: 'vixd-portfolio-cell cash' }, h('span', { className: 'vixd-portfolio-label' }, '剩余现金'), h('span', { className: 'vixd-portfolio-value' }, fmt(pf.cash))),
+          h('div', { className: 'vixd-portfolio-cell position' }, h('span', { className: 'vixd-portfolio-label' }, '当前持仓（成本）'), h('span', { className: 'vixd-portfolio-value' }, fmt(pf.position))),
+          h('div', { className: 'vixd-portfolio-cell' }, h('span', { className: 'vixd-portfolio-label' }, '总资产'), h('span', { className: 'vixd-portfolio-value' }, fmt(pf.cash + pf.position)))),
         h('form', { className: 'vixd-portfolio-setup', onSubmit: saveInitial },
-          h('label', null, '初始现金', h('input', { type: 'number', min: '0', step: '0.01', value: cash, onChange: e => setCash(e.target.value), placeholder: setupOpen ? '必填，如 100000' : String(portfolio.initialCash || 0) })),
-          h('label', null, '初始持仓', h('input', { type: 'number', min: '0', step: '0.01', value: position, onChange: e => setPosition(e.target.value), placeholder: setupOpen ? '可选，如 50000' : String(portfolio.initialPosition || 0) })),
+          h('label', null, '初始现金', h('input', { type: 'number', min: '0', step: '0.01', value: cash, onChange: e => setCash(e.target.value), placeholder: setupOpen ? '必填，如 100000' : String(pf.initialCash || 0) })),
+          h('label', null, '初始持仓', h('input', { type: 'number', min: '0', step: '0.01', value: position, onChange: e => setPosition(e.target.value), placeholder: setupOpen ? '可选，如 50000' : String(pf.initialPosition || 0) })),
           h('button', { className: 'vixd-btn primary', disabled: saving }, saving ? '保存中…' : (setupOpen ? '设定初始资金' : '更新基准'))),
         h('p', { className: 'vixd-portfolio-note' }, setupOpen ? '首次使用请设定初始资金；之后每笔操作会按「本次现金」自动增减。' : '「更新基准」会以填写的数值重置当前现金与持仓；删除操作会反向回滚资金。'));
     }
